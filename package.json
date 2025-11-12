@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "preview": "next build && next start",
     "start": "next start",
     "export": "next export",
     "lint": "eslint --fix .",
