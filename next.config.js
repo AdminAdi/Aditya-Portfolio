@@ -1,26 +1,32 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    unoptimized: true, // Required for Netlify deployment
-    domains: ['images.unsplash.com'], // Add any other image domains you use
-  },
   // Enable static exports for Netlify
   output: 'export',
-  // Optional: Add a trailing slash to all paths
+  // Add a trailing slash to all paths
   trailingSlash: true,
-  // Optional: Disable image optimization API (not needed for static export)
+  // Disable image optimization API (not needed for static export)
   images: {
-    unoptimized: true
+    unoptimized: true,
+    domains: ['images.unsplash.com']
   },
-  // Optional: Enable React 18 features
-  experimental: {
-    appDir: false,
-  },
-  // Add any environment variables that should be available at build time
+  // Environment variables
   env: {
     // Add your environment variables here if needed
   },
-}
+  // Webpack configuration
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Fixes npm packages that depend on `fs` module
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        os: false,
+      };
+    }
+    return config;
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
