@@ -17,6 +17,10 @@
     "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc --ignore-path .gitignore",
     "check-format": "prettier --list-different ./**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc --ignore-path .gitignore"
   },
+  "engines": {
+    "node": ">=18.18.2",
+    "npm": ">=9.0.0"
+  },
   "dependencies": {
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.2",
